@@ -7,7 +7,7 @@ import CustomButton from '../Components/CustomButton';
 import Banner from '../Components/Banner';
 import UpdateModal from '../Components/UpdateModal';
 
-const RenderItem = ({ item, handleDelete,handleUpdate }) => (
+const RenderItem = ({ item, handleDelete, handleUpdate }) => (
   <View style={styles.itemContainer}>
     <Image source={{ uri: item.hinh_anh_ph33497 }} style={styles.itemImage} />
     <View style={styles.itemDetails}>
@@ -83,15 +83,18 @@ const Screen1 = () => {
           renderItem={({ item }) => <RenderItem item={item} handleDelete={handleDelete} handleUpdate={handleUpdate} />}
         />
       )}
-       {selectedItem && (
+      {selectedItem && (
         <UpdateModal
           visible={modalVisible}
           item={selectedItem}
           onUpdate={() => {
-            // Update logic here
             setModalVisible(false);
           }}
-          onClose={() => setModalVisible(false)}
+          onClose={() => {
+            setModalVisible(false),
+            setSelectedItem(null)
+          }
+          }
         />
       )}
     </View>
